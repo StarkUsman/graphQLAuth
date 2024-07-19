@@ -4,14 +4,20 @@ const mongoose = require('mongoose');
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
 
-const MONGODB = "mongodb+srv://admin:coopercodes@apolloserversetup.n9ghj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const mongo = {
+    url: "mongodb://127.0.0.1:27017",
+    options: {
+        dbName: "graphQLnew",
+        appName: "graphQLnew",
+    }
+};
 
 const server = new ApolloServer({
     typeDefs,
     resolvers
 });
 
-mongoose.connect(MONGODB, {useNewUrlParser: true})
+mongoose.connect(mongo.url, mongo.options)
     .then(() => {
         console.log("MongoDB Connected");
         return server.listen({port: 5000});
