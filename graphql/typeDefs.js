@@ -1,22 +1,37 @@
-const { gql } = require('apollo-server');
+const { gql } = require('graphql-tag');
 
-module.exports = gql`
-type Message {
-    text: String
-    createdAt: String
-    createdBy: String
-}
+const typeDefs = gql`
+    scalar JSON
 
-input MessageInput {
-    text: String
-    username: String
-}
+    type User {
+        id: ID!
+        userName: String
+        email: String
+        attributes: JSON
+    }
+    
+    type Message {
+        id: ID!
+        text: String
+        createdBy: String
+        createdAt: String
+    }
 
-type Query {
-    message(id: ID!): Message
-}
+    type Query {
+        getUser(id: ID!): User
+        getUsers: [User]
+        getMessage(id: ID!): Message
+        getMessages: [Message]
 
-type Mutation {
-    createMessage(messageInput: MessageInput): Message!
-}
-`
+    }
+
+    type Mutation {
+        addUser(userName: String!, email: String, attributes: JSON): User
+        updateUser(id: ID!, userName: String, email: String, attributes: JSON): User
+        createMessage( text: String!, createdBy: String! ): Message
+        updateMessage( id: ID!, text: String, createdBy: String ): Message
+    }
+
+`;
+
+module.exports = { typeDefs };
