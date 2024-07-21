@@ -1,7 +1,7 @@
 const { User, Message } = require('../../models/models');
 const { GraphQLJSON } = require('graphql-type-json');
 
-const resolvers = {
+const messageAndUserResolvers = {
     JSON: GraphQLJSON,
 
     Query: {
@@ -47,4 +47,4 @@ const resolvers = {
     }
 };
 
-module.exports = { resolvers };
+module.exports = messageAndUserResolvers;

@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { createHandler } = require('graphql-http/lib/use/express');
 const { makeExecutableSchema } = require('@graphql-tools/schema');
-const { typeDefs } = require('./graphql/typeDefs');
-const { resolvers } = require('./graphql/resolvers/resolvers');
+const typeDefs = require('./graphql/typeDefs');
+const resolvers = require('./graphql/resolvers/index.js');
 const config = require('./config/config');
 
 const app = express();
